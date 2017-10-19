@@ -8,10 +8,10 @@
 
 #import "ViewController.h"
 #import "ONECollectionViewCell.h"
+#import "WavyFlowLayout.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (nonatomic) UICollectionViewFlowLayout *defaultLayout;
 
 @end
 
@@ -20,20 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.collectionView.dataSource = self;
-    [self setupDefaultLayout];
     
-    
-    
-}
-
--(void)setupDefaultLayout {
-    self.defaultLayout = [[UICollectionViewFlowLayout alloc] init];
-    
-    self.defaultLayout.itemSize = CGSizeMake(100, 100); // Set size of cell
-    self.defaultLayout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);  // "Border around each section"
-    self.defaultLayout.minimumInteritemSpacing = 15;  // Minimum horizontal spacing between cells
-    self.defaultLayout.minimumLineSpacing = 10;  // Minimum vertical spacing
-        
+    WavyFlowLayout *wavyFlowLayout = [[WavyFlowLayout alloc]init];
+    self.collectionView.collectionViewLayout = wavyFlowLayout;
 }
 
 
@@ -41,7 +30,6 @@
     return 10;
 }
 
-// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (__kindof UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     ONECollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"purpleCell" forIndexPath:indexPath];
