@@ -17,4 +17,29 @@
     self.minimumInteritemSpacing = CGFLOAT_MAX;
 }
 
+- (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect
+{
+    NSArray<UICollectionViewLayoutAttributes *> *superAttrs = [super layoutAttributesForElementsInRect:rect];
+    
+    // Need to copy attrs from super to avoid cached frame mismatch
+    NSMutableArray<UICollectionViewLayoutAttributes *> *newAttrs = [[NSMutableArray alloc] init];
+    
+    for (UICollectionViewLayoutAttributes *attribute in superAttrs) {
+        [newAttrs addObject:attribute];
+        
+        //create random number for y
+        CGFloat randomY = arc4random_uniform(attribute.frame.origin.y)+200;
+        CGFloat previousWidth = attribute.frame.size.width;
+        CGFloat previousHeight = attribute.frame.size.height;
+        CGFloat previousX = attribute.frame.origin.x;
+        attribute.frame = CGRectMake(previousX, randomY, previousWidth, previousHeight);
+        
+        
+    }
+    
+    
+    
+    return newAttrs;
+}
+
 @end
