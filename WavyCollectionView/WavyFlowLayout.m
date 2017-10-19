@@ -31,9 +31,9 @@
         CGFloat randomY = arc4random_uniform(attribute.frame.origin.y)+200;
         CGFloat previousWidth = attribute.frame.size.width;
         CGFloat previousHeight = attribute.frame.size.height;
+        CGFloat proportionalHeight = (previousHeight - randomY)/2;
         CGFloat previousX = attribute.frame.origin.x;
-        attribute.frame = CGRectMake(previousX, randomY, previousWidth, previousHeight);
-        
+        attribute.frame = CGRectMake(previousX, randomY, previousWidth, proportionalHeight);
         
     }
     
